@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 
 public class Numbers {
+    public boolean isPositive(int number){ return number > 0;}
+
+    public boolean isNegative(int number){ return number < 0; }
+
     public boolean isNatural(int number) {
         return number >= 1;
     }
@@ -17,41 +21,62 @@ public class Numbers {
         return number % 2 != 0;
     }
 
-    public static boolean isPerfectNumber(int number){
-        int factorSum = 0;
-        for(int count = 1; count < number; count++){
-            if(number % count == 0){
-                factorSum += count;
+
+    public boolean isDeficient(int number) {
+        int sum = 0;
+        for (int count = 1; count < number; count++) {
+            if (number % count == 0) {
+                sum += count;
             }
         }
-        return factorSum == number;
+        return sum < number;
+    }
+
+    public boolean isAbundant(int number) {
+        int sum = 0;
+        for (int count = 1; count < number; count++) {
+            if (number % count == 0) {
+                sum += count;
+            }
+        }
+        return sum > number;
+    }
+
+    public static boolean isPerfectNumber(int number){
+        int sum = 0;
+        for(int count = 1; count < number; count++){
+            if(number % count == 0){
+                sum += count;
+            }
+        }
+        return sum == number;
     }
 
     public boolean isPrime(int number){
-        int count = 0;
-        for(int i = 1; i < number; i++){
-            if(number % i == 0 ){
-                count++;
+        int counter = 0;
+        for(int count = 1; count <= number; count++){
+            if(number % count == 0 ){
+                counter++;
             }
         }
-        return count == 2;
+        return counter == 2;
     }
 
     public boolean isComposite(int number){
-        int count = 0;
-        for(int i = 1; i < number; i++){
-            if(number % i == 0 ){
-                count++;
+        int counter = 0;
+        for(int count = 1; count <= number; count++){
+            if(number % count == 0 ){
+                counter++;
             }
         }
-        return count > 2;
+        return counter > 2;
     }
 
     public ArrayList<Integer> getFactors(int number){
         ArrayList<Integer>factors = new ArrayList<>();
-        for(int i = 1; i < number; i++){
-            if(number % i == 0){
-                factors.add(i);
+        for(int count = 1; count <= number; count++){
+            if(number % count == 0){
+                factors.add(count);
             }
         }
         return factors;
@@ -60,7 +85,7 @@ public class Numbers {
 
     public int sumOfDigits(int number){
         int sum = 0;
-        while (number % 10 != 0){
+        while (number % 10 > 0){
             sum += number % 10;
             number /= 10;
         }
@@ -71,9 +96,9 @@ public class Numbers {
     public boolean isSpecial(int number){
         ArrayList<Integer>factors = new ArrayList<>();
         int sum = 0;
-        for(int i = 1; i < number; i++){
-            if(number % i == 0){
-                factors.add(i);
+        for(int count = 1; count < number; count++){
+            if(number % count == 0){
+                factors.add(count);
             }
         }
         for(int digits:factors){
@@ -135,6 +160,47 @@ public class Numbers {
         }
     }
 
-    
+    public static String getBinary(int number) {
+        int remainder;
+        if (number == 0) return "0";
+        String result = "";
+        while (number > 0) {
+            remainder = number % 2;
+            result = remainder + result;
+            number /= 2;
+        }
+        return result;
+    }
 
+    public static String getOctal(int number) {
+        int remainder;
+        if (number == 0) return "0";
+        String result = "";
+        while (number > 0) {
+            remainder = number % 8;
+            result = remainder + result;
+            number /= 8;
+        }
+        return result;
+    }
+
+    public static int digitalSum(int number) {
+        int sum = 0;
+        while (number > 0) {
+            sum += number % 10;
+            number /= 10;
+        }
+        return sum;
+    }
+
+    public static long factorial(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("number is negative");
+        }
+        long result = 1;
+        for (int count = 1; count <= number; count++) {
+            result *= count;
+        }
+        return result;
+    }
 }
